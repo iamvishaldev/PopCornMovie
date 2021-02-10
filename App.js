@@ -1,13 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,Platform } from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack'
+import {NavigationContainer} from '@react-navigation/native';
+import Search from './screens/Search';
+import Home from './screens/Home';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+// function  MyStack(){
+//   return(
+//     <View style={styles.container}>
+//       <Stack.Navigator screenOptions={{
+//     headerShown: false
+//   }} >
+//     <Stack.Screen name="Search" component={Search}/>
+//     <Stack.Screen name="Home" component={Home}/>
+//     <Stack.Screen />
+//       </Stack.Navigator>
+//     </View>
+//   )
+// }
+
+ export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer >
+      <Stack.Navigator initialRouteName="Home" screenOptions={{
+    headerShown: false
+  }}>
+        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="Search" component={Search}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -15,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === "android" ? 20 : 0
   },
 });
+
